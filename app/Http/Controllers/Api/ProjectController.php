@@ -7,13 +7,24 @@ use Illuminate\Http\Request;
 
 use App\Models\Project;
 
+
 class ProjectController extends Controller
 {
 
-    public function projectIndex()
+    public function projectsIndex()
     {
 
-        $projects = Project::with('technologies')->paginate(10);
+        $projects = Project::all();
+
+        return response()->json([
+            'projects' => $projects
+        ]);
+    }
+
+    public function projectIndexPage()
+    {
+
+        $projects = Project::paginate(10);
 
         return response()->json([
             'projects' => $projects
